@@ -19,6 +19,10 @@ namespace Sol_Minimarket.Presentacion
             InitializeComponent();
         }
 
+        #region "Mis Variables"
+        int Estadoguarda = 0; // Sin ninguna accion
+        #endregion
+
         #region "Mis Metodos"
         private void Formato_ca()
         {
@@ -41,11 +45,91 @@ namespace Sol_Minimarket.Presentacion
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
+
+        private void Estado_Botonesprincipales(bool lEstado)
+        {
+            // Activar o desactivar botones de acuerdo al estodo
+            this.Btn_nuevo.Enabled = lEstado;
+            this.Btn_actualizar.Enabled = lEstado;
+            this.Btn_eliminar.Enabled = lEstado;
+            this.Btn_reporte.Enabled = lEstado;
+            this.Btn_salir.Enabled = lEstado;
+        }
+
+        private void Estado_Botonesprocesos(bool lEstado)
+        {
+            this.Btn_cancelar.Visible = lEstado;
+            this.Btn_guardar.Visible = lEstado;
+            this.Btn_retornar.Visible = !lEstado;
+        }
+
         #endregion
 
         private void Frm_Categorias_Load(object sender, EventArgs e)
         {
             this.Listado_ca("%");
+        }
+
+        private void Btn_guardar_Click(object sender, EventArgs e)
+        {
+            if (Txt_descripcion_ca.Text == String.Empty)
+            {
+                MessageBox.Show("Falta ingresar datos requeridos (*)", "Aviso del sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else // Registro de informacion
+            {
+                E_Categorias oCa = new E_Categorias(); // Creamos un objeto de tipo categorias para recoger los campos necesarios
+                string Rpta = "";
+                // Tomar datos desde la capa de presentacion
+                oCa.Codigo_ca = 0;
+                oCa.Descripcion_ca = Txt_descripcion_ca.Text.Trim();
+                // La vista se comunica con la capa de negocio para determinar la accion a realizar
+                Rpta = N_Categorias.Guardar_ca(Estadoguarda, oCa);
+
+                // Traemos la respuesta del servidor de la capa de Datos
+                if (Rpta == "OK")
+                {
+                    this.Listado_ca("%"); // Refrescar la vista
+                    MessageBox.Show("Los datos han sido guardados correctamente", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Estadoguarda = 0; // Sin ninguna accion
+                    this.Estado_Botonesprincipales(true);
+                    this.Estado_Botonesprocesos(false);
+                    Txt_descripcion_ca.Text = "";
+                    Txt_descripcion_ca.ReadOnly = true;
+                    Tbc_principal.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show(Rpta, "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void Btn_nuevo_Click(object sender, EventArgs e)
+        {
+            Estadoguarda = 1; // Nuevo registro
+            this.Estado_Botonesprincipales(false); // Desactivar el resto de funciones cuando se hace clic en un boton de interaccion crud
+            this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
+            Txt_descripcion_ca.Text = "";
+            Txt_descripcion_ca.ReadOnly = false;
+            Tbc_principal.SelectedIndex = 1; // Cambiar al Tab de mantenimiento para iniciar el proceso de registro
+            Txt_descripcion_ca.Focus();
+        }
+
+        private void Btn_actualizar_Click(object sender, EventArgs e)
+        {
+            Estadoguarda = 2; // Actualizar registro
+        }
+
+        private void Btn_cancelar_Click(object sender, EventArgs e)
+        {
+            Estadoguarda = 0; // Cancelar proceso
+            Txt_descripcion_ca.Text = "";
+            Txt_descripcion_ca.ReadOnly = true;
+            this.Estado_Botonesprincipales(true); // Reactiva los botones principales para realizar arcciones
+            this.Estado_Botonesprocesos(false); // Oculta los botones de guardar y actualizar en la pestaña de mantenimiento
+            Tbc_principal.SelectedIndex = 0; // Regresa a la pestaña de listado
         }
     }
 }
