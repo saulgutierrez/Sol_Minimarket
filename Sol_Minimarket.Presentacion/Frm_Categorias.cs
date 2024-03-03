@@ -20,6 +20,7 @@ namespace Sol_Minimarket.Presentacion
         }
 
         #region "Mis Variables"
+        int Codigo_ca = 0;
         int Estadoguarda = 0; // Sin ninguna accion
         #endregion
 
@@ -63,6 +64,21 @@ namespace Sol_Minimarket.Presentacion
             this.Btn_retornar.Visible = !lEstado;
         }
 
+        private void Selecciona_Item()
+        {
+            // Si no hay informacion en la celda seleccionada, se lanza alerta
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value)))
+            {
+                MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                this.Codigo_ca = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_ca.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_ca"].Value);
+            }
+        }
+
         #endregion
 
         private void Frm_Categorias_Load(object sender, EventArgs e)
@@ -81,7 +97,7 @@ namespace Sol_Minimarket.Presentacion
                 E_Categorias oCa = new E_Categorias(); // Creamos un objeto de tipo categorias para recoger los campos necesarios
                 string Rpta = "";
                 // Tomar datos desde la capa de presentacion
-                oCa.Codigo_ca = 0;
+                oCa.Codigo_ca = this.Codigo_ca;
                 oCa.Descripcion_ca = Txt_descripcion_ca.Text.Trim();
                 // La vista se comunica con la capa de negocio para determinar la accion a realizar
                 Rpta = N_Categorias.Guardar_ca(Estadoguarda, oCa);
@@ -98,6 +114,7 @@ namespace Sol_Minimarket.Presentacion
                     Txt_descripcion_ca.Text = "";
                     Txt_descripcion_ca.ReadOnly = true;
                     Tbc_principal.SelectedIndex = 0;
+                    this.Codigo_ca = 0;
                 }
                 else
                 {
@@ -120,6 +137,12 @@ namespace Sol_Minimarket.Presentacion
         private void Btn_actualizar_Click(object sender, EventArgs e)
         {
             Estadoguarda = 2; // Actualizar registro
+            this.Estado_Botonesprincipales(false); // Desactivar el resto de funciones cuando se hace clic en un boton de interaccion crud
+            this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
+            this.Selecciona_Item();  // Determinar si el registro esta seleccionado
+            Tbc_principal.SelectedIndex = 1;
+            Txt_descripcion_ca.ReadOnly = false;
+            Txt_descripcion_ca.Focus();
         }
 
         private void Btn_cancelar_Click(object sender, EventArgs e)
@@ -130,6 +153,19 @@ namespace Sol_Minimarket.Presentacion
             this.Estado_Botonesprincipales(true); // Reactiva los botones principales para realizar arcciones
             this.Estado_Botonesprocesos(false); // Oculta los botones de guardar y actualizar en la pestaña de mantenimiento
             Tbc_principal.SelectedIndex = 0; // Regresa a la pestaña de listado
+        }
+
+        private void Dgv_principal_DoubleClick(object sender, EventArgs e)
+        {
+            this.Selecciona_Item();
+            this.Estado_Botonesprocesos(false); // Desactiva los botones guardar y actualizar en la pestaña de mantenimiento
+            Tbc_principal.SelectedIndex = 1; // Cambiar al Tab de mantenimiento
+        }
+
+        private void Btn_retornar_Click(object sender, EventArgs e)
+        {
+            this.Estado_Botonesprocesos(false);
+            Tbc_principal.SelectedIndex = 0; // Regresar al primer tab
         }
     }
 }

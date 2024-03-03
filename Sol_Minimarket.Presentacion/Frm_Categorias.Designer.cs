@@ -85,6 +85,7 @@
             this.Dgv_principal.ReadOnly = true;
             this.Dgv_principal.Size = new System.Drawing.Size(548, 150);
             this.Dgv_principal.TabIndex = 3;
+            this.Dgv_principal.DoubleClick += new System.EventHandler(this.Dgv_principal_DoubleClick);
             // 
             // Btn_buscar
             // 
@@ -221,6 +222,7 @@
             this.Btn_retornar.Text = "Retornar";
             this.Btn_retornar.UseVisualStyleBackColor = true;
             this.Btn_retornar.Visible = false;
+            this.Btn_retornar.Click += new System.EventHandler(this.Btn_retornar_Click);
             // 
             // Frm_Categorias
             // 
