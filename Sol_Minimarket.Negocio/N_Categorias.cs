@@ -24,5 +24,12 @@ namespace Sol_Minimarket.Negocio
             D_Categorias Datos = new D_Categorias();
             return Datos.Guardar_ca(nOpcion, oCa);
         }
+
+        // Comunicación entre la capa de interfaz con la capa de Datos
+        public static string Eliminar_ca(int Codigo_ca)
+        {
+            D_Categorias Datos = new D_Categorias();
+            return Datos.Eliminar_ca(Codigo_ca);
+        }
     }
 }

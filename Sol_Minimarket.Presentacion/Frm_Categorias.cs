@@ -20,7 +20,7 @@ namespace Sol_Minimarket.Presentacion
         }
 
         #region "Mis Variables"
-        int Codigo_ca = 0;
+        int Codigo_ca = 0; // Determinar el registro que debemos eliminar/actualizar
         int Estadoguarda = 0; // Sin ninguna accion
         #endregion
 
@@ -148,6 +148,7 @@ namespace Sol_Minimarket.Presentacion
         private void Btn_cancelar_Click(object sender, EventArgs e)
         {
             Estadoguarda = 0; // Cancelar proceso
+            this.Codigo_ca = 0; // Retornar valor original del codigo seleccionado
             Txt_descripcion_ca.Text = "";
             Txt_descripcion_ca.ReadOnly = true;
             this.Estado_Botonesprincipales(true); // Reactiva los botones principales para realizar arcciones
@@ -166,6 +167,40 @@ namespace Sol_Minimarket.Presentacion
         {
             this.Estado_Botonesprocesos(false);
             Tbc_principal.SelectedIndex = 0; // Regresar al primer tab
+            this.Codigo_ca = 0;
+        }
+
+        private void Btn_eliminar_Click(object sender, EventArgs e)
+        {
+            // Si no hay informacion en la celda seleccionada, se lanza alerta
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value)))
+            {
+                MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("¿Esta seguro de eliminar el registro seleccionado", "Aviso del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.Yes)
+                {
+                    String Rpta = "";
+                    // Guardar codigo de objeto seleccionado
+                    this.Codigo_ca = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value);
+                    // Enviar a ejecutar la eliminacion de datos
+                    Rpta = N_Categorias.Eliminar_ca(this.Codigo_ca); // Mandar la eliminacion desde la capa de presentacion a la capa de negocio
+                    if (Rpta.Equals("OK"))
+                    {
+                        this.Listado_ca("%"); // Refrescar la vista
+                        this.Codigo_ca = 0;
+                        MessageBox.Show("Registro eliminado", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+        }
+
+        private void Btn_buscar_Click(object sender, EventArgs e)
+        {
+            this.Listado_ca(Txt_buscar.Text.Trim()); // Listar los textos que coincidan con el parametro enviado
         }
     }
 }
