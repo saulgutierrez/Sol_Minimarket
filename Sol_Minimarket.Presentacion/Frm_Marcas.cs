@@ -12,34 +12,34 @@ using Sol_Minimarket.Negocio;
 
 namespace Sol_Minimarket.Presentacion
 {
-    public partial class Frm_Categorias : Form
+    public partial class Frm_Marcas : Form
     {
-        public Frm_Categorias()
+        public Frm_Marcas()
         {
             InitializeComponent();
         }
 
         #region "Mis Variables"
-        int Codigo_ca = 0; // Determinar el registro que debemos eliminar/actualizar
+        int Codigo_ma = 0; // Determinar el registro que debemos eliminar/actualizar
         int Estadoguarda = 0; // Sin ninguna accion
         #endregion
 
         #region "Mis Metodos"
-        private void Formato_ca()
+        private void Formato_ma()
         {
             Dgv_principal.Columns[0].Width = 100;
-            Dgv_principal.Columns[0].HeaderText = "CODIGO_CA";
+            Dgv_principal.Columns[0].HeaderText = "CODIGO_MA";
             Dgv_principal.Columns[1].Width = 300;
-            Dgv_principal.Columns[1].HeaderText = "CATEGORIA";
+            Dgv_principal.Columns[1].HeaderText = "MARCA";
         }
 
-        private void Listado_ca(string cTexto)
+        private void Listado_ma(string cTexto)
         {
             try
             {
                 // Cargar informacion en DataGridView
-                Dgv_principal.DataSource = N_Categorias.Listado_ca(cTexto);
-                this.Formato_ca();
+                Dgv_principal.DataSource = N_Marcas.Listado_ma(cTexto);
+                this.Formato_ma();
             }
             catch (Exception ex)
             {
@@ -67,54 +67,54 @@ namespace Sol_Minimarket.Presentacion
         private void Selecciona_Item()
         {
             // Si no hay informacion en la celda seleccionada, se lanza alerta
-            if (String.IsNullOrEmpty(Convert.ToString(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value)))
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_principal.CurrentRow.Cells["codigo_ma"].Value)))
             {
                 MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                this.Codigo_ca = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value);
+                this.Codigo_ma = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ma"].Value);
                 // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
-                Txt_descripcion_ca.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_ca"].Value);
+                Txt_descripcion_ma.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_ma"].Value);
             }
         }
 
         #endregion
 
-        private void Frm_Categorias_Load(object sender, EventArgs e)
+        private void Frm_Marcas_Load(object sender, EventArgs e)
         {
-            this.Listado_ca("%");
+            this.Listado_ma("%");
         }
 
         private void Btn_guardar_Click(object sender, EventArgs e)
         {
-            if (Txt_descripcion_ca.Text == String.Empty)
+            if (Txt_descripcion_ma.Text == String.Empty)
             {
                 MessageBox.Show("Falta ingresar datos requeridos (*)", "Aviso del sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else // Registro de informacion
             {
-                E_Categorias oCa = new E_Categorias(); // Creamos un objeto de tipo categorias para recoger los campos necesarios
+                E_Marcas oMa = new E_Marcas(); // Creamos un objeto de tipo categorias para recoger los campos necesarios
                 string Rpta = "";
                 // Tomar datos desde la capa de presentacion
-                oCa.Codigo_ca = this.Codigo_ca;
-                oCa.Descripcion_ca = Txt_descripcion_ca.Text.Trim();
+                oMa.Codigo_ma = this.Codigo_ma;
+                oMa.Descripcion_ma = Txt_descripcion_ma.Text.Trim();
                 // La vista se comunica con la capa de negocio para determinar la accion a realizar
-                Rpta = N_Categorias.Guardar_ca(Estadoguarda, oCa);
+                Rpta = N_Marcas.Guardar_ma(Estadoguarda, oMa);
 
                 // Traemos la respuesta del servidor de la capa de Datos
                 if (Rpta == "OK")
                 {
-                    this.Listado_ca("%"); // Refrescar la vista
+                    this.Listado_ma("%"); // Refrescar la vista
                     MessageBox.Show("Los datos han sido guardados correctamente", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Estadoguarda = 0; // Sin ninguna accion
                     this.Estado_Botonesprincipales(true);
                     this.Estado_Botonesprocesos(false);
-                    Txt_descripcion_ca.Text = "";
-                    Txt_descripcion_ca.ReadOnly = true;
+                    Txt_descripcion_ma.Text = "";
+                    Txt_descripcion_ma.ReadOnly = true;
                     Tbc_principal.SelectedIndex = 0;
-                    this.Codigo_ca = 0;
+                    this.Codigo_ma = 0;
                 }
                 else
                 {
@@ -128,10 +128,10 @@ namespace Sol_Minimarket.Presentacion
             Estadoguarda = 1; // Nuevo registro
             this.Estado_Botonesprincipales(false); // Desactivar el resto de funciones cuando se hace clic en un boton de interaccion crud
             this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
-            Txt_descripcion_ca.Text = "";
-            Txt_descripcion_ca.ReadOnly = false;
+            Txt_descripcion_ma.Text = "";
+            Txt_descripcion_ma.ReadOnly = false;
             Tbc_principal.SelectedIndex = 1; // Cambiar al Tab de mantenimiento para iniciar el proceso de registro
-            Txt_descripcion_ca.Focus();
+            Txt_descripcion_ma.Focus();
         }
 
         private void Btn_actualizar_Click(object sender, EventArgs e)
@@ -141,16 +141,16 @@ namespace Sol_Minimarket.Presentacion
             this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
             this.Selecciona_Item();  // Determinar si el registro esta seleccionado
             Tbc_principal.SelectedIndex = 1;
-            Txt_descripcion_ca.ReadOnly = false;
-            Txt_descripcion_ca.Focus();
+            Txt_descripcion_ma.ReadOnly = false;
+            Txt_descripcion_ma.Focus();
         }
 
         private void Btn_cancelar_Click(object sender, EventArgs e)
         {
             Estadoguarda = 0; // Cancelar proceso
-            this.Codigo_ca = 0; // Retornar valor original del codigo seleccionado
-            Txt_descripcion_ca.Text = "";
-            Txt_descripcion_ca.ReadOnly = true;
+            this.Codigo_ma = 0; // Retornar valor original del codigo seleccionado
+            Txt_descripcion_ma.Text = "";
+            Txt_descripcion_ma.ReadOnly = true;
             this.Estado_Botonesprincipales(true); // Reactiva los botones principales para realizar arcciones
             this.Estado_Botonesprocesos(false); // Oculta los botones de guardar y actualizar en la pestaña de mantenimiento
             Tbc_principal.SelectedIndex = 0; // Regresa a la pestaña de listado
@@ -167,13 +167,13 @@ namespace Sol_Minimarket.Presentacion
         {
             this.Estado_Botonesprocesos(false);
             Tbc_principal.SelectedIndex = 0; // Regresar al primer tab
-            this.Codigo_ca = 0;
+            this.Codigo_ma = 0;
         }
 
         private void Btn_eliminar_Click(object sender, EventArgs e)
         {
             // Si no hay informacion en la celda seleccionada, se lanza alerta
-            if (String.IsNullOrEmpty(Convert.ToString(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value)))
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_principal.CurrentRow.Cells["codigo_ma"].Value)))
             {
                 MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -185,13 +185,13 @@ namespace Sol_Minimarket.Presentacion
                 {
                     String Rpta = "";
                     // Guardar codigo de objeto seleccionado
-                    this.Codigo_ca = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value);
+                    this.Codigo_ma = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ma"].Value);
                     // Enviar a ejecutar la eliminacion de datos
-                    Rpta = N_Categorias.Eliminar_ca(this.Codigo_ca); // Mandar la eliminacion desde la capa de presentacion a la capa de negocio
+                    Rpta = N_Marcas.Eliminar_ma(this.Codigo_ma); // Mandar la eliminacion desde la capa de presentacion a la capa de negocio
                     if (Rpta.Equals("OK"))
                     {
-                        this.Listado_ca("%"); // Refrescar la vista
-                        this.Codigo_ca = 0;
+                        this.Listado_ma("%"); // Refrescar la vista
+                        this.Codigo_ma = 0;
                         MessageBox.Show("Registro eliminado", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
@@ -200,14 +200,14 @@ namespace Sol_Minimarket.Presentacion
 
         private void Btn_buscar_Click(object sender, EventArgs e)
         {
-            this.Listado_ca(Txt_buscar.Text.Trim()); // Listar los textos que coincidan con el parametro enviado
+            this.Listado_ma(Txt_buscar.Text.Trim()); // Listar los textos que coincidan con el parametro enviado
         }
 
         private void Btn_reporte_Click(object sender, EventArgs e)
         {
-            Reportes.Frm_Rpt_Categorias oRpt1 = new Reportes.Frm_Rpt_Categorias();
-            oRpt1.txt_p1.Text = Txt_buscar.Text;
-            oRpt1.ShowDialog();
+            Reportes.Frm_Rpt_Marcas oRpt2 = new Reportes.Frm_Rpt_Marcas();
+            oRpt2.txt_p1.Text = Txt_buscar.Text;
+            oRpt2.ShowDialog();
         }
 
         private void Btn_salir_Click(object sender, EventArgs e)

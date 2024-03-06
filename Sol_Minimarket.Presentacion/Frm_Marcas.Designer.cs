@@ -1,6 +1,6 @@
 ﻿namespace Sol_Minimarket.Presentacion
 {
-    partial class Frm_Categorias
+    partial class Frm_Marcas
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Categorias));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Marcas));
             this.Tbc_principal = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Dgv_principal = new System.Windows.Forms.DataGridView();
@@ -44,13 +44,13 @@
             this.Btn_guardar = new System.Windows.Forms.Button();
             this.Btn_cancelar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.Txt_descripcion_ca = new System.Windows.Forms.TextBox();
+            this.Txt_descripcion_ma = new System.Windows.Forms.TextBox();
             this.Btn_nuevo = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Btn_actualizar = new System.Windows.Forms.Button();
             this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Btn_reporte = new System.Windows.Forms.Button();
             this.Btn_salir = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Tbc_principal.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_principal)).BeginInit();
@@ -158,7 +158,7 @@
             this.tabPage2.Controls.Add(this.Btn_guardar);
             this.tabPage2.Controls.Add(this.Btn_cancelar);
             this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.Txt_descripcion_ca);
+            this.tabPage2.Controls.Add(this.Txt_descripcion_ma);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -215,19 +215,19 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(25, 31);
+            this.label2.Location = new System.Drawing.Point(40, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Categoría: (*)";
+            this.label2.Text = "Marca: (*)";
             // 
-            // Txt_descripcion_ca
+            // Txt_descripcion_ma
             // 
-            this.Txt_descripcion_ca.Location = new System.Drawing.Point(98, 28);
-            this.Txt_descripcion_ca.Name = "Txt_descripcion_ca";
-            this.Txt_descripcion_ca.ReadOnly = true;
-            this.Txt_descripcion_ca.Size = new System.Drawing.Size(237, 20);
-            this.Txt_descripcion_ca.TabIndex = 0;
+            this.Txt_descripcion_ma.Location = new System.Drawing.Point(98, 28);
+            this.Txt_descripcion_ma.Name = "Txt_descripcion_ma";
+            this.Txt_descripcion_ma.ReadOnly = true;
+            this.Txt_descripcion_ma.Size = new System.Drawing.Size(237, 20);
+            this.Txt_descripcion_ma.TabIndex = 0;
             // 
             // Btn_nuevo
             // 
@@ -245,6 +245,16 @@
             this.Btn_nuevo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_nuevo.UseVisualStyleBackColor = false;
             this.Btn_nuevo.Click += new System.EventHandler(this.Btn_nuevo_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "nuevo.png");
+            this.imageList1.Images.SetKeyName(1, "actualizar.png");
+            this.imageList1.Images.SetKeyName(2, "eliminar.png");
+            this.imageList1.Images.SetKeyName(3, "reporte.png");
+            this.imageList1.Images.SetKeyName(4, "exit.png");
             // 
             // Btn_actualizar
             // 
@@ -314,17 +324,7 @@
             this.Btn_salir.UseVisualStyleBackColor = false;
             this.Btn_salir.Click += new System.EventHandler(this.Btn_salir_Click);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "nuevo.png");
-            this.imageList1.Images.SetKeyName(1, "actualizar.png");
-            this.imageList1.Images.SetKeyName(2, "eliminar.png");
-            this.imageList1.Images.SetKeyName(3, "reporte.png");
-            this.imageList1.Images.SetKeyName(4, "exit.png");
-            // 
-            // Frm_Categorias
+            // Frm_Marcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -336,9 +336,9 @@
             this.Controls.Add(this.Btn_actualizar);
             this.Controls.Add(this.Btn_nuevo);
             this.Controls.Add(this.Tbc_principal);
-            this.Name = "Frm_Categorias";
-            this.Text = "Categorias";
-            this.Load += new System.EventHandler(this.Frm_Categorias_Load);
+            this.Name = "Frm_Marcas";
+            this.Text = "Marcas";
+            this.Load += new System.EventHandler(this.Frm_Marcas_Load);
             this.Tbc_principal.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -366,7 +366,7 @@
         private System.Windows.Forms.Button Btn_guardar;
         private System.Windows.Forms.Button Btn_cancelar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox Txt_descripcion_ca;
+        private System.Windows.Forms.TextBox Txt_descripcion_ma;
         private System.Windows.Forms.Button Btn_retornar;
         private System.Windows.Forms.ImageList imageList1;
     }
