@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Frm_Almacenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Almacenes.Designer.cs">
+      <DependentUpon>Frm_Almacenes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_Unidades_Medidas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet_MiniMarket.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Frm_Rpt_Almacenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\Frm_Rpt_Almacenes.Designer.cs">
+      <DependentUpon>Frm_Rpt_Almacenes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Frm_Rpt_Categorias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +120,9 @@
       <DependentUpon>Frm_Rpt_Unidades_Medidas.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Frm_Almacenes.resx">
+      <DependentUpon>Frm_Almacenes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm_Unidades_Medidas.resx">
       <DependentUpon>Frm_Unidades_Medidas.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +141,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reportes\Frm_Rpt_Almacenes.resx">
+      <DependentUpon>Frm_Rpt_Almacenes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Frm_Rpt_Categorias.resx">
       <DependentUpon>Frm_Rpt_Categorias.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +153,7 @@
     <EmbeddedResource Include="Reportes\Frm_Rpt_Unidades_Medidas.resx">
       <DependentUpon>Frm_Rpt_Unidades_Medidas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Rpt_Almacenes.rdlc" />
     <EmbeddedResource Include="Reportes\Rpt_Categorias.rdlc" />
     <EmbeddedResource Include="Reportes\Rpt_Marcas.rdlc" />
     <EmbeddedResource Include="Reportes\Rpt_Unidades_Medidas.rdlc" />
