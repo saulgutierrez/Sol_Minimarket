@@ -54,8 +54,14 @@ namespace Sol_Minimarket.Datos
                 // Definir el tipo de dato de los parametros del procedimiento almacenado y gruadar valores, utilizando el objeto
                 // instanciado desde la capa de datos
                 Comando.Parameters.Add("@nOpcion", SqlDbType.Int).Value = nOpcion;
-                Comando.Parameters.Add("@nCodigo_ma", SqlDbType.Int).Value = oMa.Codigo_ma;
-                Comando.Parameters.Add("@cDescripcion_ma", SqlDbType.VarChar).Value = oMa.Descripcion_ma;
+                Comando.Parameters.Add("@nCodigo_pr", SqlDbType.Int).Value = oPr.Codigo_pr;
+                Comando.Parameters.Add("@cDescripcion_pr", SqlDbType.VarChar).Value = oPr.Descripcion_pr;
+                Comando.Parameters.Add("@nCodigo_ma", SqlDbType.Int).Value = oPr.Codigo_ma;
+                Comando.Parameters.Add("@nCodigo_um", SqlDbType.Int).Value = oPr.Codigo_um;
+                Comando.Parameters.Add("@nCodigo_ca", SqlDbType.Int).Value = oPr.Codigo_ca;
+                Comando.Parameters.Add("@nStock_min", SqlDbType.Decimal).Value = oPr.Stock_min;
+                Comando.Parameters.Add("@nStock_max", SqlDbType.Decimal).Value = oPr.Stock_max;
+
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo registrar los datos";
             }
@@ -71,18 +77,18 @@ namespace Sol_Minimarket.Datos
             return Rpta;
         }
 
-        public string Eliminar_ma(int Codigo_ma)
+        public string Eliminar_pr(int Codigo_pr)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("USP_Eliminar_ma", SqlCon); // Usando procedimiento almacenado para eliminacion
+                SqlCommand Comando = new SqlCommand("USP_Eliminar_pr", SqlCon); // Usando procedimiento almacenado para eliminacion
                 Comando.CommandType = CommandType.StoredProcedure;
                 // Definir el tipo de dato de los parametros del procedimiento almacenado y gruadar valores, utilizando el objeto
                 // instanciado desde la capa de datos
-                Comando.Parameters.Add("@nCodigo_ma", SqlDbType.Int).Value = Codigo_ma;
+                Comando.Parameters.Add("@nCodigo_ma", SqlDbType.Int).Value = Codigo_pr;
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo eliminar los datos";
             }
