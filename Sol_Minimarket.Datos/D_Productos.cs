@@ -42,7 +42,7 @@ namespace Sol_Minimarket.Datos
             }
         }
 
-        public string Guardar_ma(int nOpcion, E_Marcas oMa)
+        public string Guardar_pr(int nOpcion, E_Productos oPr)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
