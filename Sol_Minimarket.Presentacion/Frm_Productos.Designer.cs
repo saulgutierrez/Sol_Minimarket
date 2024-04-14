@@ -33,6 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Productos));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Tbc_principal = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Dgv_principal = new System.Windows.Forms.DataGridView();
@@ -40,6 +43,19 @@
             this.Txt_buscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.Txt_stock_max = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Txt_stock_min = new System.Windows.Forms.TextBox();
+            this.Btn_lupa3 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Txt_descripcion_ca = new System.Windows.Forms.TextBox();
+            this.Btn_lupa2 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Txt_descripcion_um = new System.Windows.Forms.TextBox();
+            this.Btn_lupa1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Txt_descripcion_ma = new System.Windows.Forms.TextBox();
             this.Btn_retornar = new System.Windows.Forms.Button();
             this.Btn_guardar = new System.Windows.Forms.Button();
             this.Btn_cancelar = new System.Windows.Forms.Button();
@@ -51,23 +67,19 @@
             this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Btn_reporte = new System.Windows.Forms.Button();
             this.Btn_salir = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.Txt_descripcion_ma = new System.Windows.Forms.TextBox();
-            this.Btn_lupa1 = new System.Windows.Forms.Button();
-            this.Btn_lupa2 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.Txt_descripcion_um = new System.Windows.Forms.TextBox();
-            this.Btn_lupa3 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.Txt_descripcion_ca = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Txt_stock_min = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.Txt_stock_max = new System.Windows.Forms.TextBox();
+            this.Pnl_Listado_ma = new System.Windows.Forms.Panel();
+            this.Dgv_marcas = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Txt_buscar1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.Btn_buscar1 = new System.Windows.Forms.Button();
+            this.Btn_retornar1 = new System.Windows.Forms.Button();
             this.Tbc_principal.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_principal)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.Pnl_Listado_ma.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Dgv_marcas)).BeginInit();
             this.SuspendLayout();
             // 
             // Tbc_principal
@@ -167,6 +179,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(177)))), ((int)(((byte)(166)))));
+            this.tabPage2.Controls.Add(this.Pnl_Listado_ma);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.Txt_stock_max);
             this.tabPage2.Controls.Add(this.label6);
@@ -191,6 +204,124 @@
             this.tabPage2.Size = new System.Drawing.Size(834, 299);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mantenimiento";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(198, 195);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Stock Máximo: (*)";
+            // 
+            // Txt_stock_max
+            // 
+            this.Txt_stock_max.Location = new System.Drawing.Point(201, 214);
+            this.Txt_stock_max.Name = "Txt_stock_max";
+            this.Txt_stock_max.ReadOnly = true;
+            this.Txt_stock_max.Size = new System.Drawing.Size(86, 20);
+            this.Txt_stock_max.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(95, 195);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Stock Mínimo: (*)";
+            // 
+            // Txt_stock_min
+            // 
+            this.Txt_stock_min.Location = new System.Drawing.Point(98, 214);
+            this.Txt_stock_min.Name = "Txt_stock_min";
+            this.Txt_stock_min.ReadOnly = true;
+            this.Txt_stock_min.Size = new System.Drawing.Size(86, 20);
+            this.Txt_stock_min.TabIndex = 14;
+            // 
+            // Btn_lupa3
+            // 
+            this.Btn_lupa3.Location = new System.Drawing.Point(292, 156);
+            this.Btn_lupa3.Name = "Btn_lupa3";
+            this.Btn_lupa3.Size = new System.Drawing.Size(32, 23);
+            this.Btn_lupa3.TabIndex = 13;
+            this.Btn_lupa3.Text = ":::";
+            this.Btn_lupa3.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(15, 159);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Categoría: (*)";
+            // 
+            // Txt_descripcion_ca
+            // 
+            this.Txt_descripcion_ca.Location = new System.Drawing.Point(98, 156);
+            this.Txt_descripcion_ca.Name = "Txt_descripcion_ca";
+            this.Txt_descripcion_ca.ReadOnly = true;
+            this.Txt_descripcion_ca.Size = new System.Drawing.Size(188, 20);
+            this.Txt_descripcion_ca.TabIndex = 11;
+            // 
+            // Btn_lupa2
+            // 
+            this.Btn_lupa2.Location = new System.Drawing.Point(292, 113);
+            this.Btn_lupa2.Name = "Btn_lupa2";
+            this.Btn_lupa2.Size = new System.Drawing.Size(32, 23);
+            this.Btn_lupa2.TabIndex = 10;
+            this.Btn_lupa2.Text = ":::";
+            this.Btn_lupa2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(27, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Medida: (*)";
+            // 
+            // Txt_descripcion_um
+            // 
+            this.Txt_descripcion_um.Location = new System.Drawing.Point(98, 113);
+            this.Txt_descripcion_um.Name = "Txt_descripcion_um";
+            this.Txt_descripcion_um.ReadOnly = true;
+            this.Txt_descripcion_um.Size = new System.Drawing.Size(188, 20);
+            this.Txt_descripcion_um.TabIndex = 8;
+            // 
+            // Btn_lupa1
+            // 
+            this.Btn_lupa1.Location = new System.Drawing.Point(292, 72);
+            this.Btn_lupa1.Name = "Btn_lupa1";
+            this.Btn_lupa1.Size = new System.Drawing.Size(32, 23);
+            this.Btn_lupa1.TabIndex = 7;
+            this.Btn_lupa1.Text = ":::";
+            this.Btn_lupa1.UseVisualStyleBackColor = true;
+            this.Btn_lupa1.Click += new System.EventHandler(this.Btn_lupa1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(32, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Marca: (*)";
+            // 
+            // Txt_descripcion_ma
+            // 
+            this.Txt_descripcion_ma.Location = new System.Drawing.Point(98, 72);
+            this.Txt_descripcion_ma.Name = "Txt_descripcion_ma";
+            this.Txt_descripcion_ma.ReadOnly = true;
+            this.Txt_descripcion_ma.Size = new System.Drawing.Size(188, 20);
+            this.Txt_descripcion_ma.TabIndex = 5;
             // 
             // Btn_retornar
             // 
@@ -350,122 +481,103 @@
             this.Btn_salir.UseVisualStyleBackColor = false;
             this.Btn_salir.Click += new System.EventHandler(this.Btn_salir_Click);
             // 
-            // label3
+            // Pnl_Listado_ma
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(32, 75);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Marca: (*)";
+            this.Pnl_Listado_ma.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(131)))), ((int)(((byte)(116)))));
+            this.Pnl_Listado_ma.Controls.Add(this.Btn_retornar1);
+            this.Pnl_Listado_ma.Controls.Add(this.Btn_buscar1);
+            this.Pnl_Listado_ma.Controls.Add(this.label9);
+            this.Pnl_Listado_ma.Controls.Add(this.Txt_buscar1);
+            this.Pnl_Listado_ma.Controls.Add(this.label8);
+            this.Pnl_Listado_ma.Controls.Add(this.Dgv_marcas);
+            this.Pnl_Listado_ma.Location = new System.Drawing.Point(327, 75);
+            this.Pnl_Listado_ma.Name = "Pnl_Listado_ma";
+            this.Pnl_Listado_ma.Size = new System.Drawing.Size(334, 201);
+            this.Pnl_Listado_ma.TabIndex = 18;
+            this.Pnl_Listado_ma.Visible = false;
             // 
-            // Txt_descripcion_ma
+            // Dgv_marcas
             // 
-            this.Txt_descripcion_ma.Location = new System.Drawing.Point(98, 72);
-            this.Txt_descripcion_ma.Name = "Txt_descripcion_ma";
-            this.Txt_descripcion_ma.ReadOnly = true;
-            this.Txt_descripcion_ma.Size = new System.Drawing.Size(188, 20);
-            this.Txt_descripcion_ma.TabIndex = 5;
+            this.Dgv_marcas.AllowUserToAddRows = false;
+            this.Dgv_marcas.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.Dgv_marcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.Dgv_marcas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.Dgv_marcas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Dgv_marcas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenVertical;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_marcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.Dgv_marcas.ColumnHeadersHeight = 35;
+            this.Dgv_marcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(131)))), ((int)(((byte)(116)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_marcas.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Dgv_marcas.EnableHeadersVisualStyles = false;
+            this.Dgv_marcas.Location = new System.Drawing.Point(19, 61);
+            this.Dgv_marcas.Name = "Dgv_marcas";
+            this.Dgv_marcas.ReadOnly = true;
+            this.Dgv_marcas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Dgv_marcas.Size = new System.Drawing.Size(299, 122);
+            this.Dgv_marcas.TabIndex = 20;
+            this.Dgv_marcas.DoubleClick += new System.EventHandler(this.Dgv_marcas_DoubleClick);
             // 
-            // Btn_lupa1
+            // label8
             // 
-            this.Btn_lupa1.Location = new System.Drawing.Point(292, 72);
-            this.Btn_lupa1.Name = "Btn_lupa1";
-            this.Btn_lupa1.Size = new System.Drawing.Size(32, 23);
-            this.Btn_lupa1.TabIndex = 7;
-            this.Btn_lupa1.Text = ":::";
-            this.Btn_lupa1.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(22, 11);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(136, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "LISTADO DE MARCAS";
             // 
-            // Btn_lupa2
+            // Txt_buscar1
             // 
-            this.Btn_lupa2.Location = new System.Drawing.Point(292, 113);
-            this.Btn_lupa2.Name = "Btn_lupa2";
-            this.Btn_lupa2.Size = new System.Drawing.Size(32, 23);
-            this.Btn_lupa2.TabIndex = 10;
-            this.Btn_lupa2.Text = ":::";
-            this.Btn_lupa2.UseVisualStyleBackColor = true;
+            this.Txt_buscar1.Location = new System.Drawing.Point(71, 33);
+            this.Txt_buscar1.Name = "Txt_buscar1";
+            this.Txt_buscar1.Size = new System.Drawing.Size(171, 20);
+            this.Txt_buscar1.TabIndex = 22;
             // 
-            // label4
+            // label9
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(27, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Medida: (*)";
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(22, 40);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "Buscar:";
             // 
-            // Txt_descripcion_um
+            // Btn_buscar1
             // 
-            this.Txt_descripcion_um.Location = new System.Drawing.Point(98, 113);
-            this.Txt_descripcion_um.Name = "Txt_descripcion_um";
-            this.Txt_descripcion_um.ReadOnly = true;
-            this.Txt_descripcion_um.Size = new System.Drawing.Size(188, 20);
-            this.Txt_descripcion_um.TabIndex = 8;
+            this.Btn_buscar1.Location = new System.Drawing.Point(248, 32);
+            this.Btn_buscar1.Name = "Btn_buscar1";
+            this.Btn_buscar1.Size = new System.Drawing.Size(32, 23);
+            this.Btn_buscar1.TabIndex = 24;
+            this.Btn_buscar1.Text = ":::";
+            this.Btn_buscar1.UseVisualStyleBackColor = true;
             // 
-            // Btn_lupa3
+            // Btn_retornar1
             // 
-            this.Btn_lupa3.Location = new System.Drawing.Point(292, 156);
-            this.Btn_lupa3.Name = "Btn_lupa3";
-            this.Btn_lupa3.Size = new System.Drawing.Size(32, 23);
-            this.Btn_lupa3.TabIndex = 13;
-            this.Btn_lupa3.Text = ":::";
-            this.Btn_lupa3.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(15, 159);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Categoría: (*)";
-            // 
-            // Txt_descripcion_ca
-            // 
-            this.Txt_descripcion_ca.Location = new System.Drawing.Point(98, 156);
-            this.Txt_descripcion_ca.Name = "Txt_descripcion_ca";
-            this.Txt_descripcion_ca.ReadOnly = true;
-            this.Txt_descripcion_ca.Size = new System.Drawing.Size(188, 20);
-            this.Txt_descripcion_ca.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(95, 195);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Stock Mínimo: (*)";
-            // 
-            // Txt_stock_min
-            // 
-            this.Txt_stock_min.Location = new System.Drawing.Point(98, 214);
-            this.Txt_stock_min.Name = "Txt_stock_min";
-            this.Txt_stock_min.ReadOnly = true;
-            this.Txt_stock_min.Size = new System.Drawing.Size(86, 20);
-            this.Txt_stock_min.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(198, 195);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Stock Máximo: (*)";
-            // 
-            // Txt_stock_max
-            // 
-            this.Txt_stock_max.Location = new System.Drawing.Point(201, 214);
-            this.Txt_stock_max.Name = "Txt_stock_max";
-            this.Txt_stock_max.ReadOnly = true;
-            this.Txt_stock_max.Size = new System.Drawing.Size(86, 20);
-            this.Txt_stock_max.TabIndex = 16;
+            this.Btn_retornar1.Location = new System.Drawing.Point(286, 31);
+            this.Btn_retornar1.Name = "Btn_retornar1";
+            this.Btn_retornar1.Size = new System.Drawing.Size(32, 23);
+            this.Btn_retornar1.TabIndex = 25;
+            this.Btn_retornar1.Text = "<-|";
+            this.Btn_retornar1.UseVisualStyleBackColor = true;
             // 
             // Frm_Productos
             // 
@@ -488,6 +600,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_principal)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.Pnl_Listado_ma.ResumeLayout(false);
+            this.Pnl_Listado_ma.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Dgv_marcas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -525,5 +640,12 @@
         private System.Windows.Forms.Button Btn_lupa1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox Txt_descripcion_ma;
+        private System.Windows.Forms.Panel Pnl_Listado_ma;
+        private System.Windows.Forms.Button Btn_retornar1;
+        private System.Windows.Forms.Button Btn_buscar1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox Txt_buscar1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView Dgv_marcas;
     }
 }

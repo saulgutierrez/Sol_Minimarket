@@ -96,11 +96,50 @@ namespace Sol_Minimarket.Presentacion
             }
         }
 
+
+        private void Formato_ma_pr()
+        {
+            Dgv_marcas.Columns[0].Width = 258;
+            Dgv_marcas.Columns[0].HeaderText = "MARCA";
+            Dgv_marcas.Columns[1].Visible = false;
+        }
+
+        private void Listado_ma_pr(string cTexto)
+        {
+            try
+            {
+                // Cargar informacion en DataGridView
+                Dgv_marcas.DataSource = N_Productos.Listado_ma_pr(cTexto);
+                this.Formato_ma_pr();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void Selecciona_Item_ma_pr()
+        {
+            // Si no hay informacion en la celda seleccionada, se lanza alerta
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_marcas.CurrentRow.Cells["codigo_ma"].Value)))
+            {
+                MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                this.Codigo_ma = Convert.ToInt32(Dgv_marcas.CurrentRow.Cells["codigo_ma"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_ma.Text = Convert.ToString(Dgv_marcas.CurrentRow.Cells["descripcion_ma"].Value);
+            }
+        }
+
+
         #endregion
 
         private void Frm_Productos_Load(object sender, EventArgs e)
         {
             this.Listado_pr("%");
+            this.Listado_ma_pr("%");
         }
 
         private void Btn_guardar_Click(object sender, EventArgs e)
@@ -230,6 +269,18 @@ namespace Sol_Minimarket.Presentacion
         private void Btn_salir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Btn_lupa1_Click(object sender, EventArgs e)
+        {
+            this.Pnl_Listado_ma.Location = Btn_lupa1.Location;
+            this.Pnl_Listado_ma.Visible = true;
+        }
+
+        private void Dgv_marcas_DoubleClick(object sender, EventArgs e)
+        {
+            this.Selecciona_Item_ma_pr();
+            Pnl_Listado_ma.Visible = false;
         }
     }
 }
