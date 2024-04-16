@@ -134,5 +134,36 @@ namespace Sol_Minimarket.Datos
                 if (SQLCon.State == ConnectionState.Open) SQLCon.Close();
             }
         }
+
+        public DataTable Listado_um_pr(string cTexto)
+        {
+            SqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            // Comunicacion con el servidor
+            SqlConnection SQLCon = new SqlConnection();
+            try
+            {
+                // Invocar al metodo de conexión el la capa de Datos
+                SQLCon = Conexion.getInstancia().CrearConexion();
+                // Uso de procedimiento almacenado para hacer un listado de los producots
+                SqlCommand Comando = new SqlCommand("USP_Listado_um_pr", SQLCon);
+                Comando.CommandType = CommandType.StoredProcedure; // Establecer el tipo de consulta
+                Comando.Parameters.Add("@cTexto", SqlDbType.VarChar).Value = cTexto; // Definir el parametro que se usará para filtrar en la busqueda
+                SQLCon.Open();
+                Resultado = Comando.ExecuteReader(); // Capturamos la informacion de busqueda
+                Tabla.Load(Resultado); // Pintar el resultado de la consulta en la tabla del form
+                return Tabla;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                // Cerrar conexion
+                if (SQLCon.State == ConnectionState.Open) SQLCon.Close();
+            }
+        }
     }
 }

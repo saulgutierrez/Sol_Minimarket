@@ -37,5 +37,11 @@ namespace Sol_Minimarket.Negocio
             D_Productos Datos = new D_Productos();
             return Datos.Listado_ma_pr(cTexto);
         }
+
+        public static DataTable Listado_um_pr(string cTexto)
+        {
+            D_Productos Datos = new D_Productos();
+            return Datos.Listado_um_pr(cTexto);
+        }
     }
 }

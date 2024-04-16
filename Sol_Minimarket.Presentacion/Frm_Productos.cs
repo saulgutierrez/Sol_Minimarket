@@ -133,13 +133,51 @@ namespace Sol_Minimarket.Presentacion
             }
         }
 
+        private void Formato_um_pr()
+        {
+            Dgv_medidas.Columns[0].Width = 270;
+            Dgv_medidas.Columns[0].HeaderText = "MEDIDAS";
+            Dgv_medidas.Columns[1].Visible = false;
+        }
+
+        private void Listado_um_pr(string cTexto)
+        {
+            try
+            {
+                // Cargar informacion en DataGridView
+                Dgv_medidas.DataSource = N_Productos.Listado_um_pr(cTexto);
+                this.Formato_um_pr();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void Selecciona_Item_um_pr()
+        {
+            // Si no hay informacion en la celda seleccionada, se lanza alerta
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_medidas.CurrentRow.Cells["codigo_um"].Value)))
+            {
+                MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                this.Codigo_um = Convert.ToInt32(Dgv_medidas.CurrentRow.Cells["codigo_um"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_um.Text = Convert.ToString(Dgv_medidas.CurrentRow.Cells["descripcion_um"].Value);
+            }
+        }
+
 
         #endregion
 
         private void Frm_Productos_Load(object sender, EventArgs e)
         {
+            // Precargar informacion almacenada en base de datos en cuanto se inicialice la aplicacion
             this.Listado_pr("%");
             this.Listado_ma_pr("%");
+            this.Listado_um_pr("%");
         }
 
         private void Btn_guardar_Click(object sender, EventArgs e)
@@ -281,6 +319,38 @@ namespace Sol_Minimarket.Presentacion
         {
             this.Selecciona_Item_ma_pr();
             Pnl_Listado_ma.Visible = false;
+        }
+
+        private void Btn_lupa2_Click(object sender, EventArgs e)
+        {
+            this.Pnl_Listado_um.Location = Btn_lupa1.Location;
+            this.Pnl_Listado_um.Visible = true;
+        }
+
+        private void Btn_buscar1_Click(object sender, EventArgs e)
+        {
+            this.Listado_ma_pr(Txt_buscar1.Text);
+        }
+
+        private void Btn_buscar2_Click(object sender, EventArgs e)
+        {
+            this.Listado_um_pr(Txt_buscar2.Text);
+        }
+
+        private void Btn_retornar1_Click(object sender, EventArgs e)
+        {
+            Pnl_Listado_ma.Visible = false;
+        }
+
+        private void Btn_retornar2_Click(object sender, EventArgs e)
+        {
+            Pnl_Listado_um.Visible = false;
+        }
+
+        private void Dgv_medidas_DoubleClick(object sender, EventArgs e)
+        {
+            this.Selecciona_Item_um_pr();
+            Pnl_Listado_um.Visible = false;
         }
     }
 }
