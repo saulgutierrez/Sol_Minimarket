@@ -170,6 +170,41 @@ namespace Sol_Minimarket.Presentacion
         }
 
 
+        private void Formato_ca_pr()
+        {
+            Dgv_categorias.Columns[0].Width = 270;
+            Dgv_categorias.Columns[0].HeaderText = "CATEGORIAS";
+            Dgv_categorias.Columns[1].Visible = false;
+        }
+
+        private void Listado_ca_pr(string cTexto)
+        {
+            try
+            {
+                // Cargar informacion en DataGridView
+                Dgv_categorias.DataSource = N_Productos.Listado_ca_pr(cTexto);
+                this.Formato_ca_pr();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+        private void Selecciona_Item_ca_pr()
+        {
+            // Si no hay informacion en la celda seleccionada, se lanza alerta
+            if (String.IsNullOrEmpty(Convert.ToString(Dgv_categorias.CurrentRow.Cells["codigo_ca"].Value)))
+            {
+                MessageBox.Show("No se tiene informacion para Visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                this.Codigo_ca = Convert.ToInt32(Dgv_categorias.CurrentRow.Cells["codigo_ca"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_ca.Text = Convert.ToString(Dgv_categorias.CurrentRow.Cells["descripcion_ca"].Value);
+            }
+        }
+
         #endregion
 
         private void Frm_Productos_Load(object sender, EventArgs e)
@@ -178,6 +213,7 @@ namespace Sol_Minimarket.Presentacion
             this.Listado_pr("%");
             this.Listado_ma_pr("%");
             this.Listado_um_pr("%");
+            this.Listado_ca_pr("%");
         }
 
         private void Btn_guardar_Click(object sender, EventArgs e)
@@ -223,7 +259,11 @@ namespace Sol_Minimarket.Presentacion
             this.Estado_Botonesprincipales(false); // Desactivar el resto de funciones cuando se hace clic en un boton de interaccion crud
             this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
             Txt_descripcion_pr.Text = "";
+            Txt_stock_min.Text = "0";
+            Txt_stock_max.Text = "0";
             Txt_descripcion_pr.ReadOnly = false;
+            Txt_stock_min.ReadOnly = false;
+            Txt_stock_max.ReadOnly = false;
             Tbc_principal.SelectedIndex = 1; // Cambiar al Tab de mantenimiento para iniciar el proceso de registro
             Txt_descripcion_pr.Focus();
         }
@@ -244,7 +284,11 @@ namespace Sol_Minimarket.Presentacion
             Estadoguarda = 0; // Cancelar proceso
             this.Codigo_pr = 0; // Retornar valor original del codigo seleccionado
             Txt_descripcion_pr.Text = "";
+            Txt_stock_max.Text = "0";
+            Txt_stock_min.Text = "0";
             Txt_descripcion_pr.ReadOnly = true;
+            Txt_stock_min.ReadOnly = true;
+            Txt_stock_max.ReadOnly = true;
             this.Estado_Botonesprincipales(true); // Reactiva los botones principales para realizar arcciones
             this.Estado_Botonesprocesos(false); // Oculta los botones de guardar y actualizar en la pestaña de mantenimiento
             Tbc_principal.SelectedIndex = 0; // Regresa a la pestaña de listado
@@ -351,6 +395,28 @@ namespace Sol_Minimarket.Presentacion
         {
             this.Selecciona_Item_um_pr();
             Pnl_Listado_um.Visible = false;
+        }
+
+        private void Btn_lupa3_Click(object sender, EventArgs e)
+        {
+            this.Pnl_Listado_ca.Location = Btn_lupa1.Location;
+            this.Pnl_Listado_ca.Visible = true;
+        }
+
+        private void Dgv_categorias_DoubleClick(object sender, EventArgs e)
+        {
+            this.Selecciona_Item_ca_pr();
+            Pnl_Listado_ca.Visible = false; // Desaparecer el panel cuando se haga doble clic sobre un elemento
+        }
+
+        private void Btn_buscar3_Click(object sender, EventArgs e)
+        {
+            this.Listado_ca_pr(Txt_buscar3.Text);
+        }
+
+        private void Btn_retornar3_Click(object sender, EventArgs e)
+        {
+            Pnl_Listado_ca.Visible = false;
         }
     }
 }
