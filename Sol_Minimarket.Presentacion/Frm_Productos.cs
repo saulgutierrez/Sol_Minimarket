@@ -218,7 +218,10 @@ namespace Sol_Minimarket.Presentacion
 
         private void Btn_guardar_Click(object sender, EventArgs e)
         {
-            if (Txt_descripcion_pr.Text == String.Empty)
+            if (Txt_descripcion_pr.Text == String.Empty ||
+                Txt_descripcion_ma.Text == String.Empty ||
+                Txt_descripcion_um.Text == String.Empty ||
+                Txt_descripcion_ca.Text == String.Empty)
             {
                 MessageBox.Show("Falta ingresar datos requeridos (*)", "Aviso del sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -229,6 +232,11 @@ namespace Sol_Minimarket.Presentacion
                 // Tomar datos desde la capa de presentacion
                 oPr.Codigo_pr = this.Codigo_pr;
                 oPr.Descripcion_pr = Txt_descripcion_pr.Text.Trim();
+                oPr.Codigo_ma = this.Codigo_ma;
+                oPr.Codigo_um = this.Codigo_um;
+                oPr.Codigo_ca = this.Codigo_ca;
+                oPr.Stock_min = Convert.ToDecimal(Txt_stock_min.Text); // Conversion de tipos
+                oPr.Stock_max = Convert.ToDecimal(Txt_stock_max.Text); // Conversion de tipos
                 // La vista se comunica con la capa de negocio para determinar la accion a realizar
                 Rpta = N_Productos.Guardar_pr(Estadoguarda, oPr);
 
@@ -242,7 +250,11 @@ namespace Sol_Minimarket.Presentacion
                     this.Estado_Botonesprincipales(true);
                     this.Estado_Botonesprocesos(false);
                     Txt_descripcion_pr.Text = "";
+                    Txt_stock_min.Text = "0";
+                    Txt_stock_max.Text = "0";
                     Txt_descripcion_pr.ReadOnly = true;
+                    Txt_stock_min.ReadOnly = true;
+                    Txt_stock_max.ReadOnly = true;
                     Tbc_principal.SelectedIndex = 0;
                     this.Codigo_pr = 0;
                 }

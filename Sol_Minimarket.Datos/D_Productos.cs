@@ -49,7 +49,7 @@ namespace Sol_Minimarket.Datos
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("USP_Guardar_ma", SqlCon);
+                SqlCommand Comando = new SqlCommand("USP_Guardar_pr", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
                 // Definir el tipo de dato de los parametros del procedimiento almacenado y gruadar valores, utilizando el objeto
                 // instanciado desde la capa de datos
@@ -63,7 +63,10 @@ namespace Sol_Minimarket.Datos
                 Comando.Parameters.Add("@nStock_max", SqlDbType.Decimal).Value = oPr.Stock_max;
 
                 SqlCon.Open();
-                Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo registrar los datos";
+                // Si se ejecuta más de una tarea, en el motor de base de datos (Existe un procedimiento almacendo, donde además de registrar
+                // el producto, se actualzan los items en stock), quiere decir que la operacion concluyo de manera satisfactoria, y se procede a hacer
+                // el guardado de datos.
+                Rpta = Comando.ExecuteNonQuery() >= 1 ? "OK" : "No se pudo registrar los datos";
             }
             catch (Exception ex)
             {
