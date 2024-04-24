@@ -32,13 +32,13 @@ namespace Sol_Minimarket.Presentacion
         {
             Dgv_principal.Columns[0].Width = 100;
             Dgv_principal.Columns[0].HeaderText = "CODIGO_PR";
-            Dgv_principal.Columns[1].Width = 200;
+            Dgv_principal.Columns[1].Width = 270;
             Dgv_principal.Columns[1].HeaderText = "PRODUCTO";
-            Dgv_principal.Columns[2].Width = 140;
+            Dgv_principal.Columns[2].Width = 160;
             Dgv_principal.Columns[2].HeaderText = "MARCA";
-            Dgv_principal.Columns[3].Width = 100;
+            Dgv_principal.Columns[3].Width = 150;
             Dgv_principal.Columns[3].HeaderText = "U. MEDIDA";
-            Dgv_principal.Columns[4].Width = 120;
+            Dgv_principal.Columns[4].Width = 200;
             Dgv_principal.Columns[4].HeaderText = "CATEGORIA";
             Dgv_principal.Columns[5].Width = 60;
             Dgv_principal.Columns[5].HeaderText = "STOCK MIN";
@@ -93,6 +93,17 @@ namespace Sol_Minimarket.Presentacion
                 this.Codigo_pr = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_pr"].Value);
                 // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
                 Txt_descripcion_pr.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_pr"].Value);
+                this.Codigo_ma = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ma"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_ma.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_ma"].Value);
+                this.Codigo_um = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_um"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_um.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_um"].Value);
+                this.Codigo_ca = Convert.ToInt32(Dgv_principal.CurrentRow.Cells["codigo_ca"].Value);
+                // En caso contrario, envia la informacion a la caja de texto para comenzar la edicion
+                Txt_descripcion_ca.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["descripcion_ca"].Value);
+                Txt_stock_min.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["stock_min"].Value);
+                Txt_stock_max.Text = Convert.ToString(Dgv_principal.CurrentRow.Cells["stock_max"].Value);
             }
         }
 
@@ -205,6 +216,30 @@ namespace Sol_Minimarket.Presentacion
             }
         }
 
+        private void Formato_stock_actual()
+        {
+            Dgv_Stock_actual.Columns[0].Width = 258;
+            Dgv_Stock_actual.Columns[0].HeaderText = "ALMACEN";
+            Dgv_Stock_actual.Columns[1].Width = 150;
+            Dgv_Stock_actual.Columns[1].HeaderText = "STOCK ACTUAL";
+            Dgv_Stock_actual.Columns[2].Width = 150;
+            Dgv_Stock_actual.Columns[2].HeaderText = "PU COMPRA";
+        }
+
+        private void Listado_stock_actual(int nCodigo_pr)
+        {
+            try
+            {
+                // Cargar informacion en DataGridView
+                Dgv_Stock_actual.DataSource = N_Productos.Ver_Stock_actual_ProductoxAlmacenes(nCodigo_pr);
+                this.Formato_stock_actual();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
         #endregion
 
         private void Frm_Productos_Load(object sender, EventArgs e)
@@ -257,6 +292,7 @@ namespace Sol_Minimarket.Presentacion
                     Txt_stock_max.ReadOnly = true;
                     Tbc_principal.SelectedIndex = 0;
                     this.Codigo_pr = 0;
+                    Gbx_detalle.Visible = false;
                 }
                 else
                 {
@@ -268,6 +304,7 @@ namespace Sol_Minimarket.Presentacion
         private void Btn_nuevo_Click(object sender, EventArgs e)
         {
             Estadoguarda = 1; // Nuevo registro
+            Gbx_detalle.Visible = false;
             this.Estado_Botonesprincipales(false); // Desactivar el resto de funciones cuando se hace clic en un boton de interaccion crud
             this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
             Txt_descripcion_pr.Text = "";
@@ -283,6 +320,7 @@ namespace Sol_Minimarket.Presentacion
         private void Btn_actualizar_Click(object sender, EventArgs e)
         {
             Estadoguarda = 2; // Actualizar registro
+            Gbx_detalle.Visible = false;
             this.Estado_Botonesprincipales(false); // Desactivar el resto de funciones cuando se hace clic en un boton de interaccion crud
             this.Estado_Botonesprocesos(true); // Muestra los botones de Cancelar y Guardar
             this.Selecciona_Item();  // Determinar si el registro esta seleccionado
@@ -294,6 +332,7 @@ namespace Sol_Minimarket.Presentacion
         private void Btn_cancelar_Click(object sender, EventArgs e)
         {
             Estadoguarda = 0; // Cancelar proceso
+            Gbx_detalle.Visible = false;
             this.Codigo_pr = 0; // Retornar valor original del codigo seleccionado
             Txt_descripcion_pr.Text = "";
             Txt_stock_max.Text = "0";
@@ -311,6 +350,9 @@ namespace Sol_Minimarket.Presentacion
             this.Selecciona_Item();
             this.Estado_Botonesprocesos(false); // Desactiva los botones guardar y actualizar en la pestaña de mantenimiento
             Tbc_principal.SelectedIndex = 1; // Cambiar al Tab de mantenimiento
+            this.Listado_stock_actual(this.Codigo_pr); // Mostrar informacion de stock del producto seleccionado
+            // Al momento de consultar informacion, mostramos el panel de stock actual de productos
+            Gbx_detalle.Visible = true;
         }
 
         private void Btn_retornar_Click(object sender, EventArgs e)
@@ -318,6 +360,7 @@ namespace Sol_Minimarket.Presentacion
             this.Estado_Botonesprocesos(false);
             Tbc_principal.SelectedIndex = 0; // Regresar al primer tab
             this.Codigo_pr = 0;
+            Gbx_detalle.Visible = false;
         }
 
         private void Btn_eliminar_Click(object sender, EventArgs e)

@@ -49,5 +49,11 @@ namespace Sol_Minimarket.Negocio
             D_Productos Datos = new D_Productos();
             return Datos.Listado_ca_pr(cTexto);
         }
+
+        public static DataTable Ver_Stock_actual_ProductoxAlmacenes(int nCodigo_pr)
+        {
+            D_Productos Datos = new D_Productos();
+            return Datos.Ver_Stock_actual_ProductoxAlmacenes(nCodigo_pr);
+        }
     }
 }
