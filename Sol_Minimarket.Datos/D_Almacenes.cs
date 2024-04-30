@@ -57,7 +57,9 @@ namespace Sol_Minimarket.Datos
                 Comando.Parameters.Add("@nCodigo_al", SqlDbType.Int).Value = oAl.Codigo_al;
                 Comando.Parameters.Add("@cDescripcion_al", SqlDbType.VarChar).Value = oAl.Descripcion_al;
                 SqlCon.Open();
-                Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo registrar los datos";
+                // Como se esta ejecutando mas de un proceso en el procedimiento almacenado, se espera que mas de uno termine sus
+                // tareas de forma exitosa
+                Rpta = Comando.ExecuteNonQuery() >= 1 ? "OK" : "No se pudo registrar los datos";
             }
             catch (Exception ex)
             {
